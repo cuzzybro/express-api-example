@@ -1,9 +1,8 @@
 const express = require('express');
 const bp = require('body-parser');
-const Faker = require('faker/lib');
+const { faker } = require('@faker-js/faker')
 const app = express();
 const PORT = 10500
-let faker = new Faker();
 
 
 app.use(bp.json());
@@ -15,8 +14,8 @@ app.get("/", (req, res) => {
 });
 
 app.get('/randomPersonDetails', (req, res) => {
-    let firstname = faker.name.firstName();
-    let surname = faker.name.lastName();
+    let firstname = faker.person.firstName();
+    let surname = faker.person.lastName();
     res.send(
         {
             givenName: firstname,
