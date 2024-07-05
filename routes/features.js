@@ -2,6 +2,7 @@ const express = require('express');
 const auth = require('../middleware/auth');
 const { faker } = require('@faker-js/faker');
 const { admin, editor, viewer } = require('../middleware/roles');
+const NhiTools = require('../tools/nhi-validator').NhiTools;
 
 const router = express.Router();
 
@@ -16,5 +17,10 @@ router.get('/randomPersonDetails', [auth, admin], (req, res) => {
         }
     )
 })
+
+router.get('/RandomNhi', [auth, admin], (req, res) => {
+    let nhi = new NhiTools();
+    res.send({nhi: nhi.generateNhi()});
+});
 
 module.exports = router;
