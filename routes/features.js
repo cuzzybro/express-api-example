@@ -23,4 +23,11 @@ router.get('/RandomNhi', [auth, admin], (req, res) => {
     res.send({nhi: nhi.generateNhi()});
 });
 
+router.post('/isNhiValid', [auth, admin], (req, res) => {
+    var { nhi } = req.body
+    let tools = new NhiTools();
+    var check = tools.isNhiValid(nhi)
+    res.send({"nhi": nhi, "valid": check});
+});
+
 module.exports = router;
